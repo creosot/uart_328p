@@ -297,6 +297,10 @@ bool usart_set_baudrate(USART_t *usart, uint32_t baud, uint32_t cpu_hz)
 	}
 
 	usart->UBRR = ubrr;
+	
+	//igor
+	usart->UBRR = 0x067;
+	//igor
 	return true;
 }
 

@@ -27,12 +27,13 @@ int main(void)
 	ioport_set_pin_dir(MY_LED, IOPORT_DIR_OUTPUT);
 	ioport_set_pin_low(MY_LED);
 	usart_init_rs232(&USART0, &USART_OPTIONS);
+	
 	_delay_ms(1000);
     while (1) 
     {
 		ioport_set_pin_low(MY_LED);
 		_delay_ms(1000);
-		usart_put(&USART0, 0x01);
+		usart_put(&USART0, "a");
 		ioport_set_pin_high(MY_LED);
 		_delay_ms(1000);
 		//usart_putchar(&USART0, 50);

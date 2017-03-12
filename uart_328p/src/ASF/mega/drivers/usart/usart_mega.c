@@ -284,9 +284,9 @@ bool usart_set_baudrate(USART_t *usart, uint32_t baud, uint32_t cpu_hz)
 		min_rate /= 2;
 	}
 
-	if ((baud > max_rate) || (baud < min_rate)) {
-		return false;
-	}
+ 	if ((baud > max_rate) || (baud < min_rate)) {
+ 		return false;
+ 	}
 
 	/* Check if double speed is enabled. */
 	if (usart->UCSRnA & USART_U2X_bm) {
@@ -297,10 +297,7 @@ bool usart_set_baudrate(USART_t *usart, uint32_t baud, uint32_t cpu_hz)
 	}
 
 	usart->UBRR = ubrr;
-	
-	//igor
-	usart->UBRR = 0x067;
-	//igor
+
 	return true;
 }
 
@@ -328,4 +325,21 @@ void usart_spi_set_baudrate(USART_t *usart, uint32_t baud, uint32_t cpu_hz)
 	}
 	
 	usart->UBRR  = ubrr;
+}
+
+//igor
+void usart0_init_9600_8_1_n_16Mh(USART_t *usart, const usart_rs232_options_t *opt, uint32_t cpu_hz){
+	usart_enable_module_clock(usart);
+	usart_format_set(usart, opt->charlength, opt->paritytype, opt->stopbits);
+	usart_double_baud_disable(&USART0);
+	usart_set_baudrate_precalculated(usart, opt->baudrate, cpu_hz);
+	usart_tx_enable(usart);
+	usart_rx_enable(usart);
+}
+
+void putcharFromPM( const char pmData[]) {
+	unsigned char c = 0;
+	while ( 0 != ( c = pgm_read_byte(pmData++))) {
+		usart_putchar(&USART0, c);
+	}
 }

@@ -55,12 +55,16 @@
 #define SYSCLK_SRC_EXTERNAL   5
 
 /* =====  Select connected clock source */
-#define  SYSCLK_SOURCE         SYSCLK_SRC_RC16MHZ
+//#define  SYSCLK_SOURCE         SYSCLK_SRC_RC16MHZ
 /* #define SYSCLK_SOURCE        SYSCLK_SRC_RC128KHZ */
-/* #define SYSCLK_SOURCE        SYSCLK_SRC_TRS16MHZ */
-/* #define SYSCLK_SOURCE        SYSCLK_SRC_XOC16MHZ */
+//#define SYSCLK_SOURCE        SYSCLK_SRC_TRS16MHZ
+//#define SYSCLK_SOURCE        SYSCLK_SRC_XOC16MHZ
+#define SYSCLK_SOURCE		SYSCLK_SRC_EXTERNAL
 
 /* ===== System Clock Bus Division Options */
-#define CONFIG_SYSCLK_PSDIV         SYSCLK_PSDIV_8
+//#define CONFIG_SYSCLK_PSDIV         SYSCLK_PSDIV_8
+#define CONFIG_SYSCLK_PSDIV			SYSCLK_PSDIV_1
+
+#define BOARD_EXTERNAL_CLK			16000000UL
 
 #endif /* CONF_CLOCK_H_INCLUDED */

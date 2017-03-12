@@ -4,7 +4,7 @@
  * Created: 09.03.2017 15:40:12
  * Author : Zver
  */ 
-#define F_CPU 16000000
+#define F_CPU 16000000UL
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -14,11 +14,13 @@
 #define MY_LED    IOPORT_CREATE_PIN(PORTB, 5)
 
 static usart_rs232_options_t USART_OPTIONS = {
-	.baudrate = USART_BAUD_9600,
+	.baudrate = 9600,
 	.charlength = USART_CHSIZE_8BIT_gc,
 	.paritytype = USART_PMODE_DISABLED_gc,
 	.stopbits = false,
 };
+
+
 
 
 int main(void)
@@ -26,16 +28,15 @@ int main(void)
 	ioport_init();
 	ioport_set_pin_dir(MY_LED, IOPORT_DIR_OUTPUT);
 	ioport_set_pin_low(MY_LED);
-	usart_init_rs232(&USART0, &USART_OPTIONS);
+	usart0_init_9600_8_1_n_16Mh(&USART0, &USART_OPTIONS, 16000000UL);
 	
-	_delay_ms(1000);
     while (1) 
     {
 		ioport_set_pin_low(MY_LED);
-		_delay_ms(1000);
-		usart_put(&USART0, "a");
+		_delay_ms(3000);
+		usart_putchar(&USART0, 'a');
 		ioport_set_pin_high(MY_LED);
-		_delay_ms(1000);
+		_delay_ms(3000);
 		//usart_putchar(&USART0, 50);
     }
 }

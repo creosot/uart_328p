@@ -555,6 +555,10 @@ void usart_set_baudrate_precalculated(USART_t *usart, uint32_t baud,
 bool usart_set_baudrate(USART_t *usart, uint32_t baud, uint32_t cpu_hz);
 void usart_spi_set_baudrate(USART_t *usart, uint32_t baud, uint32_t cpu_hz);
 
+//igor
+void usart0_init_9600_8_1_n_16Mh(USART_t *usart, const usart_rs232_options_t *opt, uint32_t cpu_hz);
+void putcharFromPM( const char pmData[]);
+
 /* ! @} */
 
 #ifdef __cplusplus

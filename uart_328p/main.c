@@ -20,6 +20,8 @@ static usart_rs232_options_t USART_OPTIONS = {
 	.stopbits = false,
 };
 
+PROGMEM_DECLARE(char, str1[]) = "string from PM";
+const char *str2 = "bla-bla";
 
 
 
@@ -34,10 +36,10 @@ int main(void)
     {
 		ioport_set_pin_low(MY_LED);
 		_delay_ms(3000);
-		usart_putchar(&USART0, 'a');
+		putcharFromPMtoUSART0andCR(str1);
 		ioport_set_pin_high(MY_LED);
 		_delay_ms(3000);
-		//usart_putchar(&USART0, 50);
+		putcharFromSTRtoUSART0andCR(str2);
     }
 }
 

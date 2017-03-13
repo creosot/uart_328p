@@ -337,9 +337,17 @@ void usart0_init_9600_8_1_n_16Mh(USART_t *usart, const usart_rs232_options_t *op
 	usart_rx_enable(usart);
 }
 
-void putcharFromPM( const char pmData[]) {
+void putcharFromPMtoUSART0andCR(const char pmData[]) {
 	unsigned char c = 0;
 	while ( 0 != ( c = pgm_read_byte(pmData++))) {
 		usart_putchar(&USART0, c);
 	}
+	usart_putchar(&USART0, 0x0D);
+}
+
+void putcharFromSTRtoUSART0andCR(const char *str) {
+	while (*str) {
+		usart_putchar(&USART0, *str++);
+	}
+	usart_putchar(&USART0, 0x0D);
 }
